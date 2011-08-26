@@ -1,3 +1,4 @@
+# Source this file in your shell startup, i.e. bashrc, zshrc, etc.
 # Wrap ssh commmand to allow smart pane behavior in tmux.
 #
 # After opening a tmux window and ssh-ing into another server, new panes will
@@ -23,4 +24,8 @@ function ssh() {
     /usr/bin/ssh $*
   fi
 }
+
+# shell variable used in tmux conf to determine where script is
+export TMUX_SSH_DIR=$(dirname $(readlink -f $0))
+
 # vim: set ft=sh:
