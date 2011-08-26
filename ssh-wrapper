@@ -4,18 +4,17 @@ function ssh() {
   # if tmux is running
   if [ -n "$TMUX" ]
   then
-    # save exact ssh command to file
-    #filename=$(tmux )
+    window_index=$(tmux display-message -p '#I')
+    session_variable_name="window_${window_index}_ssh_command"
+    echo $session_variable_name
     
-    #umask u+rw,g=,o=
-    #echo "$0 $*" > ~/test
-    tmux setenv "TEST_VAR" "TEST_VAL"
+    tmux setenv $session_variable_name "$*"
 
     # run ssh
     /usr/bin/ssh $*
 
     # clean up
-    rm $TMUX.ssh
+    #rm $TMUX.ssh
   else
     # just run
     /usr/bin/ssh $*
