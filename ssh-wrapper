@@ -6,10 +6,8 @@ function ssh() {
   then
     window_index=$(tmux display-message -p '#I')
     session_variable_name="window_${window_index}_ssh_command"
-    #echo $session_variable_name
     
     tmux setenv $session_variable_name "$*"
-    #eval ${session_variable_name}=$(echo -ne \""$*"\")
 
     # run ssh
     /usr/bin/ssh $*
