@@ -4,7 +4,12 @@
 
 # Extract ssh arguments like hostname used to initial connect to another
 # machine.
-ssh_args=$(tmux showenv | grep "ssh_args" | sed 's/^.*=//')
+
+window_index=$(tmux display-message -p '#I')
+session_variable_name="window_${window_index}_ssh_args"
+echo $session_variable_name > /tmp/test5
+
+ssh_args=$(tmux showenv | grep -F "$session_variable_name" | sed 's/^.*=//')
 if [ -n "$ssh_args" ]
 then
   tmux splitw $1 "exec ssh $ssh_args"
