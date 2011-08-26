@@ -1,0 +1,23 @@
+# wrap ssh to aid in tmux splits
+function ssh() {
+
+  # if tmux is running
+  if [ -n "$TMUX" ]
+  then
+    # save exact ssh command to file
+    #filename=$(tmux )
+    
+    #umask u+rw,g=,o=
+    #echo "$0 $*" > ~/test
+    tmux setenv "TEST_VAR" "TEST_VAL"
+
+    # run ssh
+    /usr/bin/ssh $*
+
+    # clean up
+    rm $TMUX.ssh
+  else
+    # just run
+    /usr/bin/ssh $*
+  fi
+}
