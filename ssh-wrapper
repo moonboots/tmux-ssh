@@ -13,6 +13,7 @@ function ssh() {
     /usr/bin/ssh $*
 
     # clean up
+    tmux setenv -u $session_variable_name
     #rm $TMUX.ssh
   else
     # just run
